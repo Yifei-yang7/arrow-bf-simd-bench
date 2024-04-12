@@ -57,6 +57,7 @@ ExternalProject_Add(${ARROW_BASE}
 
 # Include directory needs to exist to run configure step
 file(MAKE_DIRECTORY ${ARROW_INCLUDE_DIR})
+file(MAKE_DIRECTORY ${ARROW_JEMALLOC_INCLUDE_DIR})
 
 add_library(jemalloc_static STATIC IMPORTED)
 set_target_properties(jemalloc_static PROPERTIES IMPORTED_LOCATION ${ARROW_JEMALLOC_STATIC_LIB})
