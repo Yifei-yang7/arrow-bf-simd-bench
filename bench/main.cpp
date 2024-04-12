@@ -7,6 +7,8 @@
 
 using namespace arrow::compute;
 
+static constexpr int ITER = 3;
+
 void makeBuildInput(int64_t num, uint64_t* hashes) {
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -43,12 +45,12 @@ void probe(const std::shared_ptr<BlockedBloomFilter> &bf, int64_t num, const uin
 }
 
 void runBuild(int64_t num, const uint64_t* hashes) {
-  ankerl::nanobench::Config().minEpochIterations(1).run(
+  ankerl::nanobench::Config().minEpochIterations(ITER).run(
           fmt::format("[SIMD OFF] bf-build-{}-hashes", num), [&] {
             build(num, hashes, false);
           });
 
-  ankerl::nanobench::Config().minEpochIterations(1).run(
+  ankerl::nanobench::Config().minEpochIterations(ITER).run(
           fmt::format("[SIMD ON] bf-build-{}-hashes", num), [&] {
             build(num, hashes, true);
           });
@@ -56,12 +58,12 @@ void runBuild(int64_t num, const uint64_t* hashes) {
 
 void runProbe(int64_t num_build, const std::shared_ptr<BlockedBloomFilter> &bf,
               int64_t num_probe, const uint64_t* probe_hashes, uint8_t* out) {
-  ankerl::nanobench::Config().minEpochIterations(1).run(
+  ankerl::nanobench::Config().minEpochIterations(ITER).run(
           fmt::format("[SIMD OFF] bf-probe-{}-hashes (build={})", num_probe, num_build), [&] {
             probe(bf, num_probe, probe_hashes, out, false);
           });
 
-  ankerl::nanobench::Config().minEpochIterations(1).run(
+  ankerl::nanobench::Config().minEpochIterations(ITER).run(
           fmt::format("[SIMD ON] bf-probe-{}-hashes (build={})", num_probe, num_build), [&] {
             probe(bf, num_probe, probe_hashes, out, true);
           });
