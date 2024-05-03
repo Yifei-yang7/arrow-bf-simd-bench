@@ -7,6 +7,7 @@
 #include "hash.hpp"
 #include <nanobench.h>
 #include <fmt/format.h>
+#include <cassert>
 
 static constexpr int ITER = 3;
 

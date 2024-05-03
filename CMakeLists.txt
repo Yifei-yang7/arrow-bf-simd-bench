@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(arrow_bf_simd_bench)
 
 set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx2 -mavx512vl -mavx512dq")
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_LIST_DIR}/cmake")
 set(DEPS_PREFIX "_deps")
