@@ -9,8 +9,18 @@ include(External_arrow)
 include(External_nanobench)
 include(External_fmt)
 
-add_executable(arrow_bf_simd_bench
-        bench/main.cpp)
-target_link_libraries(arrow_bf_simd_bench arrow_static)
-target_link_libraries(arrow_bf_simd_bench nanobench::nanobench)
-target_link_libraries(arrow_bf_simd_bench fmt::fmt)
+add_executable(bf_bench
+        bench/bf_bench.cpp)
+target_link_libraries(bf_bench arrow_static)
+target_link_libraries(bf_bench nanobench::nanobench)
+target_link_libraries(bf_bench fmt::fmt)
+
+add_library(hash
+        hash/hash.cpp hash/hash.hpp)
+
+add_executable(hash_bench
+        bench/hash_bench.cpp)
+target_link_libraries(hash_bench hash)
+target_link_libraries(hash_bench nanobench::nanobench)
+target_link_libraries(hash_bench fmt::fmt)
+target_include_directories(hash_bench PUBLIC hash)
