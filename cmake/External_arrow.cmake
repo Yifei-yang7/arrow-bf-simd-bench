@@ -3,7 +3,7 @@ include(GNUInstallDirs)
 # This repo is forked from Arrow repo, with several customized changes for FPDB
 #  - stick it into a fixed thread index in serial execution
 #  - add metrics tracing bytes read from Parquet
-set(ARROW_VERSION "release-8.0.0-for-fpdb")
+set(ARROW_VERSION "release-8.0.0-bf-avx512")
 set(ARROW_GIT_URL "https://github.com/Yifei-yang7/arrow.git")
 
 
@@ -42,7 +42,7 @@ ExternalProject_Add(${ARROW_BASE}
         -DARROW_DATASET=OFF
         -DARROW_IPC=OFF
         -DARROW_COMPUTE=ON
-        -DARROW_SIMD_LEVEL=AVX2
+        -DARROW_SIMD_LEVEL=AVX512
         -DCMAKE_INSTALL_MESSAGE=NEVER
         -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
